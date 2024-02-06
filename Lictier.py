@@ -6,7 +6,7 @@ from Lict import Lict
 class Lictier(Lict):
 
     def drop(self, slobj=slice(None)):
-        for i in range(*slobj.indices(len(self._l))):
+        for i in range(*slobj.indices(len(self._Lict__l))):
             self.remove(i)
 
 
