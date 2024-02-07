@@ -149,7 +149,7 @@ class Lict(dict):
 
     def _newcompf(self, compf, def2):
         """Helper function for .sortbyval(); return new sorting key function."""
-        defhandlers = {"gta": self.__GTA, "lta": self._lTA, "def": self._defval}
+        defhandlers = {"gta": self.__GTA, "lta": self.__LTA, "def": self._defval}
         defhandle = defhandlers.get(def2, def2)
         def comphandler(e):
             return defhandle if e is self._defval else compf(e)
@@ -173,11 +173,13 @@ class Lict(dict):
         """Lict version of fromkeys; Equivalent to normal .__init__()"""
         return cls(args, defval=defval)
     
-    def get_defval(self):
+    @property
+    def defval(self):
         """_defval getter"""
         return self._defval
 
-    def set_defval(self, newdefval=None):
+    @defval.setter
+    def defval(self, newdefval=None):
         """_defval setter;
         CAUTION: changes all _defval values to new one.
         This can take some time depending on the length.
